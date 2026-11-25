@@ -1,0 +1,141 @@
+.hero-compass-3d-wrapper {
+  grid-column: 1;
+  grid-row: 1;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-compass-3d-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  outline: none;
+  filter: drop-shadow(0 20px 32px rgba(24, 26, 24, 0.08));
+}
+
+.callout-text-mobile {
+  display: none;
+}
+
+.callout-text-full {
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .hero-compass-3d-wrapper {
+    align-items: flex-end;
+    padding-bottom: clamp(6vh, 8vh, 12vh);
+  }
+
+  .callout-text-mobile {
+    display: inline;
+  }
+
+  .callout-text-full {
+    display: none;
+  }
+
+  .exploded-callout-text {
+    font-size: clamp(6.4px, 2.0vw, 8px);
+    letter-spacing: 0.02em;
+    font-weight: 700;
+  }
+
+  .exploded-callout-line {
+    stroke-width: 0.85;
+  }
+}
+
+/* 4. Exploded Schematic Overlay (Blueprint Leader Lines & Telemetry) */
+.hero-compass-exploded-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+  transition: opacity 0.4s ease-out;
+}
+
+.exploded-callout {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drafting-compass-group {
+  opacity: 0;
+}
+
+.exploded-callout-line {
+  stroke: #181a18;
+  stroke-width: 1.1;
+  fill: none;
+  stroke-dasharray: 2.5 2.5;
+  opacity: 0.75;
+}
+
+.exploded-callout-dot {
+  fill: #181a18;
+  opacity: 0.85;
+}
+
+.exploded-callout-text {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: #181a18;
+  user-select: none;
+  opacity: 0.82;
+}
+
+/* 5. Architectural Drafting Circle Draw Styles */
+.drafting-compass-circle {
+  fill: none;
+  stroke: #181a18;
+  stroke-width: 1.35;
+  opacity: 0.88;
+}
+
+.drafting-compass-arm {
+  stroke: #181a18;
+  stroke-width: 0.95;
+  stroke-dasharray: 2.5 2.5;
+  opacity: 0.70;
+}
+
+.drafting-compass-dot {
+  fill: #181a18;
+  opacity: 0.95;
+}
+
+.drafting-center-cross {
+  stroke: #181a18;
+  stroke-width: 1.1;
+  opacity: 0.85;
+}
+
+/* 6. Interactive Click Hit Area */
+.compass-interactive-hit-area {
+  fill: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+

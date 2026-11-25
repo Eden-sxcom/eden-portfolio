@@ -1,0 +1,1371 @@
+/* ==========================================================================
+   Selected Expeditions: Swiss Editorial 3-Panel Showcase (Robert Aperios Inspired)
+   ========================================================================== */
+
+.expeditions-perspective-stage {
+  grid-column: 1;
+  grid-row: 1;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 100vh;
+  width: 100%;
+  z-index: 1;
+  align-self: start;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.expeditions-perspective-stage:not(.is-active) {
+  pointer-events: none;
+  z-index: 1;
+}
+
+.expeditions-perspective-stage:not(.is-active) * {
+  pointer-events: none;
+}
+
+.expeditions-perspective-stage.is-active {
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* 0. Expanding White/Neutral Canvas (Base for Section 3) */
+.expeditions-white-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ecebe8;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+/* 1. Main Swiss Container */
+.expeditions-swiss-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding-top: var(--space-4xl);
+  padding-bottom: clamp(0.8rem, 1.8vh, 1.6rem);
+  padding-left: clamp(1.2rem, 3.5vw, 3.5rem);
+  padding-right: clamp(1.2rem, 3.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* Crosshair Registration Marks (+) */
+.swiss-crosshair {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(18, 21, 18, 0.4);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.ch-tl { top: 16px; left: 24px; }
+.ch-tc { top: 16px; left: 50%; transform: translateX(-50%); }
+.ch-tr { top: 16px; right: 24px; }
+.ch-bl { bottom: 16px; left: 24px; }
+.ch-bc { bottom: 16px; left: 50%; transform: translateX(-50%); }
+.ch-br { bottom: 16px; right: 24px; }
+
+/* Top Header Datum Bar */
+.swiss-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: clamp(0.4rem, 1vh, 0.8rem);
+  margin-top: 0;
+}
+
+.swiss-header-left,
+.swiss-header-right {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(18, 21, 18, 0.65);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-sep {
+  color: rgba(18, 21, 18, 0.3);
+}
+
+.designer-name {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.count-tag {
+  color: var(--color-olive);
+  font-weight: 600;
+}
+
+/* Massive Brutalist WORK Header */
+.swiss-main-title {
+  font-size: clamp(2.8rem, 6.2vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: #121512;
+  margin: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* 2. Two-Column Swiss Layout Grid */
+.swiss-grid {
+  display: grid;
+  grid-template-columns: minmax(310px, 1.2fr) minmax(500px, 2.8fr);
+  border-top: 1px solid rgba(18, 21, 18, 0.2);
+  border-bottom: 1px solid rgba(18, 21, 18, 0.2);
+  flex: 1;
+  min-height: 0;
+  margin: clamp(0.5rem, 1.2vh, 1rem) 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   LEFT PANEL: Dynamic Dossier Sidebar (Counter + Title + Specs + Tech Stack + Dossier Button)
+   ========================================================================== */
+
+.swiss-col-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1rem, 1.8vw, 1.8rem) clamp(1rem, 1.6vw, 1.6rem);
+  border-right: 1px solid rgba(18, 21, 18, 0.2);
+  min-width: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(18, 21, 18, 0.2) transparent;
+  box-sizing: border-box;
+}
+
+.swiss-left-content {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.4vh, 16px);
+  width: 100%;
+}
+
+.swiss-left-top {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Odometer Reel Animation */
+.swiss-counter-reel {
+  height: clamp(3.6rem, 5.5vw, 5.2rem);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.2rem;
+}
+
+.swiss-counter-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.swiss-counter-num {
+  height: clamp(3.6rem, 5.5vw, 5.2rem);
+  display: flex;
+  align-items: center;
+  font-size: clamp(3.6rem, 5.5vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: #121512;
+}
+
+/* Project Title & Metadata placed directly below counter number */
+.swiss-left-project-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.swiss-project-title {
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #121512;
+  margin: 0 0 2px 0;
+}
+
+.swiss-project-cat {
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--color-olive);
+  font-weight: 600;
+  margin-bottom: 1px;
+}
+
+.swiss-project-role {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: rgba(18, 21, 18, 0.6);
+  margin-bottom: 3px;
+}
+
+.swiss-project-status {
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: rgba(18, 21, 18, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swiss-project-status .status-dot {
+  color: #4ade80;
+  font-size: 0.55rem;
+}
+
+/* Dynamic Project Details Animation (Soft Micro-Fade & Drift) */
+@keyframes swissDetailsFadeSlide {
+  0% {
+    opacity: 0.15;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.swiss-project-dynamic-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: swissDetailsFadeSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Mid Section: Editorial Narrative, Impact & Arsenal Telemetry (Option A) */
+.swiss-left-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.7rem;
+  color: #121512;
+  padding: 4px 0;
+}
+
+.swiss-box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(18, 21, 18, 0.15);
+  padding-bottom: 6px;
+  margin-bottom: 1px;
+}
+
+.swiss-box-kicker {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--color-olive);
+  letter-spacing: 0.08em;
+}
+
+.swiss-box-idx {
+  font-size: 0.6rem;
+  color: rgba(18, 21, 18, 0.5);
+  letter-spacing: 0.06em;
+}
+
+.swiss-editorial-summary {
+  font-size: 0.66rem;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: rgba(18, 21, 18, 0.85);
+  margin: 0;
+}
+
+/* Impact Callout: Clean Swiss Hairline Box (No Thick Side-Tab Antipattern) */
+.swiss-impact-callout {
+  border: 1px solid rgba(74, 88, 68, 0.22);
+  padding: 7px 9px;
+  background: rgba(74, 88, 68, 0.04);
+  border-radius: 2px;
+}
+
+.impact-kicker {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--color-olive);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.impact-detail {
+  font-size: 0.64rem;
+  line-height: 1.4;
+  color: #121512;
+  margin: 0;
+}
+
+.swiss-stack-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.swiss-stack-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: rgba(18, 21, 18, 0.6);
+  font-weight: 700;
+}
+
+.swiss-stack-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.swiss-tech-pill {
+  background: rgba(18, 21, 18, 0.06);
+  border: 1px solid rgba(18, 21, 18, 0.12);
+  padding: 2.5px 7px;
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  color: #121512;
+}
+
+.swiss-left-bottom {
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Boxed Dossier Button */
+.swiss-dossier-btn {
+  background: transparent;
+  border: 1.5px solid #121512;
+  padding: 8px 16px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #121512;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.swiss-dossier-btn:hover {
+  background: #121512;
+  color: #ecebe8;
+  transform: translateY(-1px);
+}
+
+.swiss-dossier-btn .btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.swiss-dossier-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* All Projects / Complete Archive Button (Positioned directly to the right of View Dossier) */
+.swiss-all-projects-btn {
+  background: rgba(74, 88, 68, 0.05);
+  border: 1.5px solid var(--color-olive, #4A5844);
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-olive, #4A5844);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.swiss-all-projects-btn:hover {
+  background: var(--color-olive, #4A5844);
+  color: #ecebe8;
+  transform: translateY(-1px);
+}
+
+.swiss-all-projects-btn .btn-arrow {
+  transition: transform 0.2s ease;
+}
+
+.swiss-all-projects-btn:hover .btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ==========================================================================
+   RIGHT PANEL: Expansive 3D Visual Stage + Unified Tactical Datum Bar
+   ========================================================================== */
+
+.swiss-col-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(0.6rem, 1.4vw, 1.2rem);
+  position: relative;
+  background: rgba(255, 255, 255, 0.28);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.swiss-depth-carousel-wrapper {
+  width: 100%;
+  max-width: 860px;
+  flex: 1;
+  min-height: clamp(340px, 48vh, 460px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+}
+
+/* Tactical Datum Bar beneath Stage */
+.swiss-stage-bottom-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0.6rem 0.2rem;
+  border-top: 1px dashed rgba(18, 21, 18, 0.18);
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+.swiss-stage-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Tactical Step Navigation - Accessible Target Size (≥44px) */
+.swiss-step-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.swiss-step-track {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.swiss-step-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 44px;
+  min-width: 32px;
+}
+
+.swiss-step-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  min-height: 44px;
+  min-width: 44px;
+  pointer-events: none;
+}
+
+/* Hardware-Accelerated ScaleX Step Dash (0 Layout Thrashing) */
+.swiss-step-dash {
+  width: 28px;
+  height: 2px;
+  background: rgba(18, 21, 18, 0.22);
+  border-radius: 1px;
+  transform: scaleX(0.45);
+  transform-origin: left center;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.32s ease;
+  will-change: transform;
+}
+
+.swiss-step-btn:hover .swiss-step-dash {
+  background: rgba(74, 88, 68, 0.6);
+  transform: scaleX(0.65);
+}
+
+.swiss-step-btn.is-active .swiss-step-dash {
+  transform: scaleX(1);
+  background: var(--color-olive);
+}
+
+.swiss-step-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-olive);
+}
+
+.swiss-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #121512;
+  text-decoration: none;
+  border-bottom: 1px solid #121512;
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+  pointer-events: auto;
+}
+
+.swiss-source-link:hover {
+  opacity: 0.7;
+}
+
+/* Grand Archive CTA - Placed strictly on the final project (04) */
+.swiss-archive-highlight-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-olive, #4A5844);
+  color: #ECEBE8;
+  border: 1.5px solid #141714;
+  padding: 8px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(74, 88, 68, 0.22);
+  pointer-events: auto;
+}
+
+.swiss-archive-highlight-btn:hover {
+  background: #141714;
+  color: #ECEBE8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(18, 21, 18, 0.3);
+}
+
+.swiss-archive-highlight-btn .cta-kicker {
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  color: rgba(236, 235, 232, 0.75);
+  font-weight: 600;
+}
+
+.swiss-archive-highlight-btn .cta-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.swiss-archive-highlight-btn .cta-arrow {
+  transition: transform 0.2s ease;
+  font-size: 0.82rem;
+}
+
+.swiss-archive-highlight-btn:hover .cta-arrow {
+  transform: translate(3px, -3px);
+}
+
+.swiss-archive-highlight-btn.inline-compact {
+  padding: 6px 12px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.swiss-archive-highlight-btn.inline-compact .cta-kicker {
+  display: none;
+}
+
+/* ==========================================================================
+   Field Dossier Pop-Up Modal & Archive Modal
+   ========================================================================== */
+
+.dossier-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(18, 20, 18, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  overscroll-behavior: contain;
+  touch-action: none;
+  animation: modalBackdropFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dossier-modal-backdrop.is-stacked {
+  z-index: 10000;
+  background: rgba(18, 20, 18, 0.72);
+}
+
+.dossier-modal-container {
+  background-color: #FFFFFF;
+  border: 1px solid var(--hairline-base);
+  width: 100%;
+  max-width: 780px;
+  max-height: 88vh;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  box-shadow: 0 24px 60px -12px rgba(24, 26, 24, 0.25), 0 8px 24px -4px rgba(24, 26, 24, 0.12);
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  animation: modalContentScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.archive-modal-wide {
+  max-width: 900px;
+}
+
+.dossier-modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--hairline-base);
+  background-color: var(--color-canvas);
+  flex-shrink: 0;
+}
+
+.dossier-modal-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+}
+
+.dossier-index-badge {
+  font-weight: 700;
+  color: var(--color-olive);
+  letter-spacing: 0.06em;
+}
+
+.dossier-meta-sep {
+  color: var(--color-ink-faint);
+}
+
+.dossier-meta-tag {
+  color: var(--color-ink-muted);
+  letter-spacing: 0.04em;
+}
+
+.dossier-close-btn {
+  background: transparent;
+  border: 1px solid var(--hairline-base);
+  padding: 5px 12px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.dossier-close-btn:hover {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+  border-color: var(--color-ink);
+}
+
+.dossier-modal-body {
+  padding: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+}
+
+.dossier-modal-content {
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+}
+
+.dossier-title-block {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--hairline-subtle);
+}
+
+.dossier-title {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0 0 4px 0;
+}
+
+.dossier-tagline {
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--color-olive);
+  margin: 0;
+}
+
+.dossier-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: var(--space-xl);
+  padding: 12px;
+  background-color: var(--color-canvas);
+  border: 1px solid var(--hairline-subtle);
+  border-radius: 2px;
+}
+
+.dossier-meta-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dossier-label {
+  font-size: 0.62rem;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.06em;
+}
+
+.dossier-nature-badge,
+.dossier-team-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.dossier-team-badge.is-group {
+  color: var(--color-olive);
+}
+
+.dossier-team-badge.is-individual {
+  color: var(--color-ink);
+}
+
+.dossier-role-value,
+.dossier-timeline-value {
+  font-size: 0.72rem;
+  color: var(--color-ink);
+}
+
+.dossier-visual-banner {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  overflow: hidden;
+  border: none;
+  margin: 0;
+  background: #121512;
+}
+
+.dossier-visual-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dossier-section {
+  margin-bottom: var(--space-xl);
+}
+
+.dossier-section-title {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--hairline-subtle);
+  padding-bottom: 6px;
+  margin-bottom: 12px;
+}
+
+.dossier-sec-num {
+  color: var(--color-olive);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.dossier-narrative-summary {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.dossier-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dossier-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+
+.dossier-bullet-marker {
+  color: var(--color-olive);
+  font-size: 0.75rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.dossier-stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dossier-stack-tag {
+  background-color: var(--color-canvas);
+  border: 1px solid var(--hairline-base);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  border-radius: 2px;
+  color: var(--color-ink);
+}
+
+.dossier-modal-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--hairline-base);
+  background-color: var(--color-canvas);
+  flex-shrink: 0;
+}
+
+.dossier-footer-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dossier-footer-links.centered {
+  justify-content: center;
+}
+
+/* Hide bottom close button on desktop to eliminate redundancy with top-right CLOSE [ESC] */
+.dossier-footer-close-btn {
+  display: none !important;
+}
+
+.dossier-modal-footer.mobile-only {
+  display: none !important;
+}
+
+.dossier-action-btn {
+  padding: 8px 18px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+.dossier-action-btn.primary {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+.dossier-action-btn.primary:hover {
+  background-color: var(--color-olive);
+}
+
+.dossier-action-btn.secondary {
+  border: 1px solid var(--hairline-base);
+  color: var(--color-ink);
+}
+
+.dossier-action-btn.secondary:hover {
+  background-color: #FFFFFF;
+}
+
+/* Archive rows */
+.archive-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.archive-row-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid var(--hairline-subtle);
+  border-radius: 2px;
+  background-color: var(--color-canvas);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.archive-row-card:hover {
+  border-color: var(--color-olive);
+  background-color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(18, 21, 18, 0.08);
+}
+
+.archive-row-card:active {
+  transform: translateY(0);
+}
+
+.archive-row-card:focus-visible {
+  outline: 2px solid var(--color-olive);
+  outline-offset: 2px;
+}
+
+.archive-row-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.archive-row-idx {
+  font-size: 0.7rem;
+  color: var(--color-olive);
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.archive-row-card:hover .archive-row-idx {
+  transform: translateX(2px);
+}
+
+.archive-row-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+}
+
+.archive-row-card:hover .archive-row-title {
+  color: var(--color-olive);
+}
+
+.archive-row-cat {
+  font-size: 0.65rem;
+  color: var(--color-ink-muted);
+}
+
+.archive-row-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--hairline-base);
+  padding: 5px 12px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  border-radius: 2px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.archive-row-card:hover .archive-row-btn {
+  background: var(--color-ink);
+  color: #FFFFFF;
+  border-color: var(--color-ink);
+  transform: translateX(2px);
+}
+
+/* Animations */
+@keyframes modalBackdropFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalContentScaleIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .swiss-grid {
+    grid-template-columns: minmax(280px, 1.15fr) minmax(440px, 2fr);
+  }
+
+  .swiss-depth-carousel-wrapper {
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 860px) {
+  .swiss-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .swiss-col-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(18, 21, 18, 0.2);
+    padding: 1.2rem;
+  }
+
+  .swiss-counter-reel {
+    height: 3.2rem;
+  }
+
+  .swiss-counter-num {
+    height: 3.2rem;
+    font-size: 3.2rem;
+  }
+
+  .swiss-col-stage {
+    padding: 1rem;
+  }
+
+  .swiss-stage-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .expeditions-swiss-container {
+    padding-top: calc(var(--space-2xl) + 24px);
+    padding-bottom: clamp(1rem, 2vh, 1.8rem);
+    padding-left: clamp(1rem, 3vw, 1.5rem);
+    padding-right: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .swiss-header-row {
+    font-size: 0.62rem;
+  }
+
+  .swiss-main-title {
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
+  }
+
+  .swiss-col-left {
+    padding: 0.5rem 0.75rem 0.6rem;
+    max-height: none;
+    overflow: visible;
+    border-bottom: 1px dashed rgba(18, 21, 18, 0.18);
+  }
+
+  .swiss-left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    height: auto;
+  }
+
+  .swiss-left-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .swiss-counter-reel {
+    height: 2.2rem;
+    flex-shrink: 0;
+  }
+
+  .swiss-counter-num {
+    height: 2.2rem;
+    font-size: 2.2rem;
+    line-height: 2.2rem;
+  }
+
+  .swiss-project-dynamic-details {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .swiss-left-project-info {
+    margin: 0;
+  }
+
+  .swiss-project-title {
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    margin: 0;
+    white-space: normal;
+    line-height: 1.15;
+    word-break: break-word;
+  }
+
+  /* Hide long specifications and secondary metadata on mobile */
+  .swiss-left-body,
+  .swiss-project-cat,
+  .swiss-project-role,
+  .swiss-project-status {
+    display: none !important;
+  }
+
+  .swiss-left-bottom {
+    margin-top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+
+  .swiss-dossier-btn,
+  .swiss-all-projects-btn {
+    flex: 1 1 0;
+    width: auto;
+    justify-content: center;
+    padding: 8px 8px;
+    font-size: clamp(0.62rem, 2.5vw, 0.72rem);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  .swiss-col-stage {
+    padding: 0.75rem 0.75rem 80px 0.75rem;
+    align-items: center;
+  }
+
+  .swiss-depth-carousel-wrapper {
+    min-height: clamp(240px, 35vh, 320px);
+  }
+
+  .swiss-stage-bottom-bar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  .swiss-stage-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 6px;
+  }
+
+  .swiss-step-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .swiss-source-link {
+    margin: 0 auto;
+    font-size: 0.65rem;
+  }
+
+  .swiss-archive-highlight-btn {
+    margin: 0 auto;
+  }
+
+  /* Compact & Airy Archive Modal on Mobile */
+  .dossier-modal-backdrop {
+    padding: 12px;
+  }
+
+  .dossier-modal-container {
+    max-height: 84vh;
+    min-height: 0;
+  }
+
+  .dossier-modal-top {
+    padding: 10px 14px;
+  }
+
+  /* Relocate Close Button to bottom on Mobile viewports */
+  .dossier-modal-top .dossier-close-btn {
+    display: none !important;
+  }
+
+  .dossier-modal-header-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: clamp(0.56rem, 2.3vw, 0.65rem);
+    gap: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .dossier-modal-header-meta .dossier-meta-sep {
+    display: none !important;
+  }
+
+  .dossier-index-badge {
+    text-align: left;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .dossier-meta-tag {
+    text-align: right;
+    line-height: 1.25;
+    flex: 1;
+  }
+
+  .dossier-modal-content {
+    padding: 1rem 0.85rem;
+  }
+
+  .dossier-modal-footer {
+    padding: 10px 14px;
+  }
+
+  .dossier-modal-footer.mobile-only {
+    display: block !important;
+  }
+
+  /* Show bottom close button on mobile viewports */
+  .dossier-footer-close-btn {
+    display: inline-flex !important;
+  }
+
+  .dossier-footer-links {
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dossier-action-btn {
+    padding: 8px 14px;
+    font-size: 0.7rem;
+  }
+
+  .archive-cards-list {
+    gap: 6px;
+  }
+
+  .archive-row-card {
+    padding: 8px 10px;
+  }
+
+  .archive-row-left {
+    gap: 8px;
+  }
+
+  .archive-row-idx {
+    font-size: 0.6rem;
+  }
+
+  .archive-row-title {
+    font-size: 0.88rem;
+  }
+
+  .archive-row-cat {
+    font-size: 0.58rem;
+    display: none;
+  }
+
+  .archive-row-btn {
+    padding: 4px 8px;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .expeditions-swiss-container {
+    padding-top: calc(var(--space-xl) + 28px);
+  }
+
+  .swiss-header-right {
+    display: none;
+  }
+
+  /* The dateline and WORK wordmark no longer fit on one line on narrow phones */
+  .swiss-header-row {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 4px 10px;
+  }
+
+  .swiss-header-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .swiss-main-title {
+    font-size: clamp(2rem, 12vw, 2.75rem);
+    text-align: left;
+  }
+
+  .swiss-project-title {
+    font-size: 1.25rem;
+  }
+
+  .swiss-editorial-summary {
+    font-size: 0.6rem;
+  }
+}

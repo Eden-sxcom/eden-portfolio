@@ -1,0 +1,86 @@
+/* Lufga Display Fonts */
+@font-face {
+  font-family: 'Lufga';
+  src: url('/fonts/Lufga-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lufga';
+  src: url('/fonts/Lufga-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lufga';
+  src: url('/fonts/Lufga-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lufga';
+  src: url('/fonts/Lufga-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* JetBrains Mono Technical Fonts (Variable) */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-VariableFont_wght.woff2') format('woff2-variations'),
+       url('/fonts/JetBrainsMono-VariableFont_wght.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Printvetica Display Font */
+@font-face {
+  font-family: 'Printvetica';
+  src: url('/fonts/Printvetica.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hitobito Display Font */
+@font-face {
+  font-family: 'Hitobito';
+  src: url('/fonts/Hitobito.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Daydream Retro Pixel Font */
+@font-face {
+  font-family: 'Daydream';
+  src: url('/fonts/Daydream-DEMO.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TBJ Serial Port Monospace Font */
+@font-face {
+  font-family: 'TBJ Serial Port';
+  src: url('/fonts/TBJSerialPortMonospace-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TBJ Serial Port';
+  src: url('/fonts/TBJSerialPortMonospace-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

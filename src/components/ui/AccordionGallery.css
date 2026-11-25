@@ -1,0 +1,506 @@
+/* ==========================================================================
+   AccordionGallery Component Styles
+   Embedded Technical Dossiers with Vertical Book-Spine Titles (Swiss Editorial)
+   ========================================================================== */
+
+.accordion-gallery {
+  --ag-accent: #4A5844;
+  --ag-overlay: #121512;
+  --ag-text: #F7F6F2;
+  --ag-gap: 14px;
+  --ag-radius: 4px;
+  --ag-media-size: 400px;
+
+  display: flex;
+  flex-direction: row;
+  gap: var(--ag-gap);
+  width: 100%;
+  max-width: 100%;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  user-select: none;
+}
+
+.accordion-gallery--vertical {
+  flex-direction: column;
+}
+
+/* Individual Accordion Panel */
+.ag-panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: var(--ag-radius);
+  border: 1px solid var(--hairline-base, rgba(24, 26, 24, 0.12));
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+  outline: none;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  background: var(--color-surface-dark, #101210);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.4);
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ag-panel:hover {
+  border-color: rgba(74, 88, 68, 0.55);
+}
+
+.ag-panel--active {
+  border-color: var(--ag-accent);
+  box-shadow: 0 16px 40px -12px rgba(24, 26, 24, 0.6), 0 0 0 1px rgba(74, 88, 68, 0.35);
+  cursor: default;
+}
+
+.ag-panel:focus-visible {
+  outline: none;
+  border-color: var(--ag-accent);
+  box-shadow:
+    0 0 0 2px var(--ag-accent),
+    0 12px 30px -14px rgba(0, 0, 0, 0.6);
+}
+
+/* Background Photographic Frame & Film */
+.ag-panel__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.ag-panel__media {
+  --ag-gray: 0.85;
+  --ag-dim: 0.45;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--ag-media-size);
+  height: 100%;
+  filter: grayscale(var(--ag-gray));
+  transform: translate(-50%, -50%);
+}
+
+.ag-panel__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ag-panel__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(18, 21, 18, 0.55) 0%, rgba(18, 21, 18, 0.3) 30%, rgba(18, 21, 18, 0.92) 100%),
+    rgba(18, 21, 18, var(--ag-dim, 0.45));
+  transition: background 0.4s ease;
+}
+
+.ag-panel--active .ag-panel__overlay {
+  background:
+    linear-gradient(180deg, rgba(14, 17, 14, 0.88) 0%, rgba(14, 17, 14, 0.94) 100%),
+    rgba(14, 17, 14, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Top Tactical Telemetry Badge */
+.ag-panel__top {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+  z-index: 7;
+}
+
+.ag-panel__badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F7F6F2;
+  background: rgba(24, 26, 24, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(247, 246, 242, 0.18);
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+
+.ag-panel--active .ag-panel__badge {
+  background: var(--ag-accent);
+  color: #F7F6F2;
+  border-color: rgba(247, 246, 242, 0.35);
+}
+
+.ag-panel--active .ag-panel__top {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.ag-panel__code {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: rgba(247, 246, 242, 0.75);
+  background: rgba(24, 26, 24, 0.65);
+  backdrop-filter: blur(6px);
+  padding: 2px 7px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Collapsed View: Vertical Spine Title (Book-Spine / Field Dossier Style)
+   ========================================================================== */
+
+.ag-panel__spine {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+  padding: 60px 10px 30px;
+}
+
+.ag-panel__spine-content {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.ag-panel__spine-idx {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-sage-accent, #A3B59D);
+}
+
+.ag-panel__spine-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #F7F6F2;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+  transition: color 0.25s ease;
+  margin: 0;
+}
+
+.ag-panel:hover .ag-panel__spine-title {
+  color: var(--color-sage-hover, #C2D4BC);
+}
+
+.ag-panel__spine-code {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(247, 246, 242, 0.55);
+}
+
+/* ==========================================================================
+   Expanded View: Embedded Full Technical Dossier Panel
+   ========================================================================== */
+
+.ag-panel__dossier {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  padding: clamp(2rem, 2.6vw, 2.8rem) clamp(1.6rem, 2.5vw, 2.4rem) clamp(2.2rem, 2.5vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 18px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 88, 68, 0.5) transparent;
+}
+
+.ag-panel__dossier::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ag-panel__dossier::-webkit-scrollbar-thumb {
+  background-color: rgba(74, 88, 68, 0.5);
+  border-radius: 2px;
+}
+
+/* Dossier Header */
+.ag-dossier__header {
+  border-bottom: 1px solid rgba(247, 246, 242, 0.1);
+  padding-bottom: var(--space-md);
+}
+
+.ag-dossier__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  margin-bottom: 6px;
+}
+
+.ag-dossier__pillar-idx {
+  color: #A3B59D;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.ag-dossier__sep {
+  color: rgba(247, 246, 242, 0.25);
+}
+
+.ag-dossier__pillar-code {
+  color: rgba(247, 246, 242, 0.6);
+  letter-spacing: 0.06em;
+}
+
+.ag-dossier__title {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #F7F6F2;
+  margin: 0 0 6px 0;
+}
+
+.ag-dossier__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(247, 246, 242, 0.75);
+  margin-bottom: 8px;
+}
+
+.ag-dossier__desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: rgba(247, 246, 242, 0.88);
+  max-width: 900px;
+  margin: 0;
+}
+
+/* Verified Capabilities Section */
+.ag-dossier__skills {
+  margin-top: 4px;
+}
+
+.ag-dossier__skills-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(247, 246, 242, 0.55);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(247, 246, 242, 0.08);
+}
+
+.ag-dossier__skills-status {
+  color: #A3B59D;
+}
+
+.ag-dossier__skills-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .ag-dossier__skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ag-skill-card {
+  background: var(--color-surface-dark-card, rgba(24, 28, 24, 0.75));
+  border: 1px solid rgba(247, 246, 242, 0.12);
+  border-radius: 2px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.ag-skill-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.ag-skill-card:hover {
+  border-color: rgba(163, 181, 157, 0.5);
+  background: rgba(28, 34, 28, 0.85);
+}
+
+.ag-skill-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ag-skill-card__bullet {
+  color: #A3B59D;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+.ag-skill-card__name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #F7F6F2;
+  letter-spacing: 0.02em;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.ag-skill-card__spec {
+  font-size: 0.71rem;
+  color: rgba(247, 246, 242, 0.65);
+  padding-left: 14px;
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Primary Toolchain Tray */
+.ag-dossier__tools {
+  padding-top: var(--space-xs);
+  border-top: 1px solid rgba(247, 246, 242, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ag-dossier__tools-heading {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(247, 246, 242, 0.5);
+}
+
+.ag-dossier__tools-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ag-tool-pill {
+  background: rgba(247, 246, 242, 0.08);
+  border: 1px solid rgba(247, 246, 242, 0.14);
+  padding: 3px 8px;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  color: #F7F6F2;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
+}
+
+.ag-tool-pill:hover {
+  border-color: #A3B59D;
+  color: #A3B59D;
+  background: rgba(74, 88, 68, 0.2);
+}
+
+/* ==========================================================================
+   Mobile Responsive Breakdown (<= 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .accordion-gallery {
+    display: block;
+    width: 100%;
+    perspective: none;
+    height: auto !important;
+  }
+
+  .ag-panel {
+    transform: none !important;
+  }
+
+  .ag-panel--collapsed {
+    display: none !important;
+  }
+
+  .ag-panel--active {
+    width: 100%;
+    display: block;
+    position: relative;
+    border-radius: var(--ag-radius);
+    height: auto;
+    overflow: hidden;
+  }
+
+  .ag-panel__media {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* In mobile collapsed view, spine is hidden as collapsed panels are hidden */
+  .ag-panel__spine {
+    display: none;
+  }
+
+  .ag-panel__code {
+    display: none;
+  }
+
+  .ag-panel__dossier {
+    position: relative;
+    padding: 44px 16px 28px;
+    height: auto;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .ag-dossier__title {
+    font-size: 1.35rem;
+  }
+
+  .ag-dossier__skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-panel,
+  .ag-panel__media,
+  .ag-panel__spine,
+  .ag-panel__dossier {
+    will-change: auto;
+  }
+}

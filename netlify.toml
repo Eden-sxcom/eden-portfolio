@@ -1,0 +1,10 @@
+[build]
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Security and cache headers live in public/_headers, which Netlify copies into
+# dist/ and applies at the edge. Keeping them in one file avoids emitting
+# duplicate Content-Security-Policy headers, which a browser would intersect.

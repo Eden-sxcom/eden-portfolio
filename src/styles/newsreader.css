@@ -1,0 +1,16 @@
+/* Newsreader — self-hosted latin variable subset (no external font request) */
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-normal-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/newsreader/newsreader-italic-400.woff2') format('woff2');
+}
